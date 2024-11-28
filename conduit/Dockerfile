@@ -1,13 +1,17 @@
-FROM nikolaik/python-nodejs:python3.10-nodejs23-bullseye
+FROM nikolaik/python-nodejs:python3.10-nodejs23-alpine
 
-USER pn
-WORKDIR /home/pn/app
+WORKDIR /home/spirit/app
 
 COPY . .
 
-RUN python -m venv .venv
-RUN source .venv/bin/activate
+RUN pip install -r backend/requirements.txt && \
+python backend/manage.py migrate
 
-RUN pip install -r backend/requirements.txt
-#RUN python backend/manage.py migrate
-#RUN python backend/manage.py runserver
+RUN npm --prefix=frontend install
+
+RUN chmod +x start.sh
+EXPOSE 4200 8000
+CMD ["sh", "start.sh"]
+
+# docker build . -t spirit/conduit
+# docker run -d -p4200:4200 -p8000:8000 spirit/conduit
