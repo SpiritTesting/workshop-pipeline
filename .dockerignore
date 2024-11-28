@@ -1,0 +1,10 @@
+.git
+.gitignore
+.github
+frontend/node_modules
+npm-debug.log
+Dockerfile*
+LICENSE
+logo.png
+README.md
+.vscode
