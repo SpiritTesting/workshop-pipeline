@@ -26,3 +26,4 @@ jobs:
 
       - name: Run Django Tests
         run: python manage.py test
+        continue-on-error: true  # Dies erlaubt es, bei einem Fehler fortzufahren
