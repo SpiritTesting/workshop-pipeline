@@ -7,7 +7,7 @@ env:
 
 on:
   pull_request:
-    branches: ['master', 'deploy', 'ci-playground']
+    types: [opened, synchronize, reopened]
 
   push:
     branches: ['master', 'deploy', 'ci-playground']
@@ -17,20 +17,23 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  #angular_tests_job:
-  #  uses: ./.github/workflows/angular-tests.yaml
+  sonar_job:
+    uses: ./.github/workflows/sonar.yaml
 
-  #django_tests_job:
-  #  uses: ./.github/workflows/django-tests.yaml
+  angular_tests_job:
+    uses: ./.github/workflows/angular-tests.yaml
 
-  #linter_job:
-  #  uses: ./.github/workflows/linter.yaml
+  django_tests_job:
+    uses: ./.github/workflows/django-tests.yaml
+
+  linter_job:
+    uses: ./.github/workflows/linter.yaml
 
   #quality-gate_job:
-  #  needs: [ angular_tests_job, django_tests_job, linter_job ]
-  #  uses: ./.github/workflows/quality-gate.yaml
+    #needs: [ angular_tests_job, django_tests_job, linter_job ]
+    #uses: ./.github/workflows/quality-gate.yaml
 
   build_and_publish_job:
-   # needs: [angular_tests_job, django_tests_job, linter_job]
+    needs: [angular_tests_job, django_tests_job, linter_job]
     uses: ./.github/workflows/build.yaml
 
