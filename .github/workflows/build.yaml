@@ -29,5 +29,5 @@ jobs:
 
       - name: Build Docker Image and publish to docker hub
         working-directory: ./conduit
-        run: docker buildx build -t spiritindianer/workshop-pipeline:${{ env.BRANCH_TAG }} -f Dockerfile .
-          docker push spiritindianer/workshop-pipeline:${{ env.BRANCH_TAG }}
+        run: docker buildx build -t spiritindianer/workshop-pipeline:${{ env.BRANCH_TAG }} -f Dockerfile . ;
+          docker push spiritindianer/workshop-pipeline:${{ env.BRANCH_TAG }} ;
