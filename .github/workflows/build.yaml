@@ -17,7 +17,7 @@ jobs:
           ACTIONS_STEP_DEBUG: true
         with:
           username: spiritindianer
-          password: "${{ secrets.DOCKER_PASSWORD }}"
+          password: "${{ secrets.DPASS }}"
 
       - name: Set Docker tag based on branch
         id: vars
