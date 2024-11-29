@@ -33,5 +33,5 @@ jobs:
 
       - name: Build Docker Image and publish to docker hub
         working-directory: ./conduit
-        run: docker buildx build -t ghcr.io/${{ github.repository }}/workshop-pipeline:${{ env.BRANCH_TAG }} -f Dockerfile . ;
-          docker push ghcr.io/${{ github.repository }}/workshop-pipeline:${{ env.BRANCH_TAG }} ;
+        run: docker buildx build -t ghcr.io/${{ github.repository }}:${{ env.BRANCH_TAG }} -f Dockerfile . ;
+          docker push ghcr.io/${{ github.repository }}:${{ env.BRANCH_TAG }} ;
