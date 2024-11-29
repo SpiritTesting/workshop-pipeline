@@ -35,4 +35,4 @@ jobs:
 
       - name: Build Docker Image
         working-directory: ./conduit
-        run: docker buildx build -t spirit/conduit -f conduit/Dockerfile .
+        run: docker buildx build -t spirit/conduit -f Dockerfile .
