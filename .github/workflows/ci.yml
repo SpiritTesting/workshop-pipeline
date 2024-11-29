@@ -34,4 +34,5 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Docker Image
+        working-directory: ./conduit
         run: docker buildx build -t spirit/conduit -f conduit/Dockerfile .
