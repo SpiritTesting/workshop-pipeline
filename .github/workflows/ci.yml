@@ -26,13 +26,11 @@ jobs:
   linter_job:
     uses: ./.github/workflows/linter.yaml
 
-  docker_build_job:
-    needs: [angular_tests_job, django_tests_job, linter_job]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  #quality-gate_job:
+  #  needs: [ angular_tests_job, django_tests_job, linter_job ]
+  #  uses: ./.github/workflows/quality-gate.yaml
 
-      - name: Build Docker Image
-        working-directory: ./conduit
-        run: docker buildx build -t spirit/conduit -f Dockerfile .
+  build_job:
+    needs: [angular_tests_job, django_tests_job, linter_job]
+    uses: ./.github/workflows/build.yaml
+

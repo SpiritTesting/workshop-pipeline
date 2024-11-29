@@ -9,7 +9,6 @@ on:
 jobs:
   quality_gate:
     runs-on: ubuntu-latest
-    needs: [angular_tests, django_tests, linter]
     if: false  # Deaktiviert diesen Workflow, um als Template zu dienen
     steps:
       - name: Evaluate Test Results

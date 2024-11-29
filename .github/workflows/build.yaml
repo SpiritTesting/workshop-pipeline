@@ -1,0 +1,16 @@
+name: Linter
+
+on:
+  workflow_call:
+
+jobs:
+  docker_build_job:
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker Image
+        working-directory: ./conduit
+        run: docker buildx build -t spirit/conduit -f Dockerfile .
