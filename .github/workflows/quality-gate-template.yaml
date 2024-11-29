@@ -1,0 +1,32 @@
+name: Quality Gate (Template)
+
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
+
+jobs:
+  quality_gate:
+    runs-on: ubuntu-latest
+    if: false  # Deaktiviert diesen Workflow, um als Template zu dienen
+    steps:
+      - name: Evaluate Test Results
+        run: |
+          if [ "${{ needs.angular_tests.result }}" != "success" ]; then
+            echo "Angular tests failed!"
+            exit 1
+          fi
+          if [ "${{ needs.django_tests.result }}" != "success" ]; then
+            echo "Django tests failed!"
+            exit 1
+          fi
+          if [ "${{ needs.linter.result }}" != "success" ]; then
+            echo "Linter checks failed!"
+            exit 1
+          fi
+      - name: Quality Gate Passed
+        run: echo "All checks are successful. Quality Gate passed!"
+
+
+        #Das alles muss wahrscheinlich in die ci.yml wenn wir soweit sind
