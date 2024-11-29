@@ -1,0 +1,41 @@
+<div>
+  @if (account) {
+    <h2 id="session-page-heading">
+      Aktive Sitzungen für [<strong>{{ account.login }}</strong
+      >]
+    </h2>
+  }
+
+  @if (success) {
+    <div class="alert alert-success"><strong>Sitzung wurde geschlossen!</strong></div>
+  }
+
+  @if (error) {
+    <div class="alert alert-danger"><strong>Es ist ein Fehler aufgetreten!</strong> Die Sitzung konnte nicht geschlossen werden.</div>
+  }
+
+  <div class="table-responsive">
+    <table class="table table-striped" aria-describedby="session-page-heading">
+      <thead>
+        <tr>
+          <th scope="col">IP Adresse</th>
+          <th scope="col">User Agent</th>
+          <th scope="col">Datum</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (session of sessions; track $index) {
+          <tr>
+            <td>{{ session.ipAddress }}</td>
+            <td>{{ session.userAgent }}</td>
+            <td>{{ session.tokenDate | date: 'longDate' }}</td>
+            <td>
+              <button type="submit" class="btn btn-primary" (click)="invalidate(session.series)">Schließen</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

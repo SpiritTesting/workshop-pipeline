@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-md-3">
+    <span class="spirittesting img-fluid rounded"></span>
+  </div>
+
+  <div class="col-md-6">
+    <h1 class="display-4"><span>Willkommen bei<br></span>Pipeline-Reporting!</h1>
+
+    <p class="lead">Dies ist die Hauptseite</p>
+
+    <div>
+      @if (account() !== null) {
+        <div class="alert alert-success">
+          @if (account(); as accountRef) {
+            <span id="home-logged-message">Sie sind als Benutzer &quot;{{ accountRef.login }}&quot; angemeldet.</span>
+          }
+        </div>
+      } @else {
+        <div class="alert alert-warning">
+          <span>Wenn Sie sich </span>
+          <a class="alert-link" (click)="login()">anmelden</a
+          ><span>
+            möchten, versuchen Sie es mit <br />- Administrator (Name=&quot;admin&quot; und Passwort=&quot;admin&quot;)<br />- Benutzer
+            (Name=&quot;user&quot; und Passwort=&quot;user&quot;).</span
+          >
+        </div>
+
+        <div class="alert alert-warning">
+          <span>Sie haben noch keinen Zugang?</span>&nbsp;
+          <a class="alert-link" routerLink="/account/register">Registrieren Sie sich</a>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <span class="spiritonside img-fluid rounded"></span>
+  </div>
+</div>
