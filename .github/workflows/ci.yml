@@ -10,7 +10,7 @@ on:
     types: [opened, synchronize, reopened]
 
   push:
-    branches: ['master', 'deploy', 'ci-playground']
+    branches: ['main', 'deploy', 'ci-playground']
 
 concurrency:
   group: ${{ github.head_ref || github.run_id }}
