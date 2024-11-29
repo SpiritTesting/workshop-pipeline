@@ -30,11 +30,7 @@ jobs:
   #  needs: [ angular_tests_job, django_tests_job, linter_job ]
   #  uses: ./.github/workflows/quality-gate.yaml
 
-  build_job:
+  build_and_publish_job:
     needs: [angular_tests_job, django_tests_job, linter_job]
     uses: ./.github/workflows/build.yaml
-
-  publish_job:
-    needs: [build_job]
-    uses: ./.github/workflows/docker-publish.yaml
 
