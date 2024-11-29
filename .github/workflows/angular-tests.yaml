@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./frontend
+        working-directory: ./conduit/frontend
 
     steps:
       - uses: actions/checkout@v2
