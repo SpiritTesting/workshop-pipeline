@@ -34,3 +34,4 @@ jobs:
     needs: [angular_tests_job, django_tests_job, linter_job]
     uses: ./.github/workflows/build.yaml
 
+

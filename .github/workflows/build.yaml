@@ -1,4 +1,4 @@
-name: Linter
+name: Build
 
 on:
   workflow_call:
@@ -11,6 +11,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set Docker tag based on branch
+        id: vars
+        run: |
+          if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+            echo "BRANCH_TAG=latest" >> $GITHUB_ENV
+          else
+            BRANCH_NAME=$(echo "${{ github.ref }}" | sed 's/refs\/heads\///')
+            echo "BRANCH_TAG=${BRANCH_NAME}" >> $GITHUB_ENV
+          fi
+
       - name: Build Docker Image
         working-directory: ./conduit
-        run: docker buildx build -t spirit/conduit -f Dockerfile .
+        run: docker buildx build -t spiritindianer/workshop-pipeline:${{ env.BRANCH_TAG }} -f Dockerfile .
