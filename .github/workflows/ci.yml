@@ -17,11 +17,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  linter_job:
-    uses: .github/workflows/linter.yaml
-
   angular_tests_job:
     uses: .github/workflows/angular-tests.yaml
 
   django_tests_job:
     uses: .github/workflows/django-tests.yaml
+
+  linter_job:
+    uses: .github/workflows/linter.yaml
