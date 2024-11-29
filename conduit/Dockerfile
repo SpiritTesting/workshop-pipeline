@@ -15,17 +15,18 @@ RUN npm install
 
 FROM python:3.10-alpine3.20
 
+RUN apk add nodejs npm && \
+    adduser -S spirit
+USER spirit
 WORKDIR /home/spirit/app
 EXPOSE 4200 8000
-RUN apk add nodejs npm
-COPY --from=backend /opt/venv /home/spirit/app/backend/.venv
-COPY --from=frontend /home/spirit/app /home/spirit/app/frontend
-COPY backend /home/spirit/app/backend
-COPY start.sh .
+COPY --chown=spirit --from=backend /opt/venv /home/spirit/app/backend/.venv
+COPY --chown=spirit --from=frontend /home/spirit/app /home/spirit/app/frontend
+COPY --chown=spirit backend /home/spirit/app/backend
+COPY --chown=spirit start.sh .
 RUN chmod +x start.sh
-RUN mkdir /home/spirit/app/backend/database
 
 CMD ["sh", "start.sh"]
 
 # docker build .\conduit\ -t spirit/conduit
-# docker run -d -p 4200:4200 -p 8000:8000 spirit/conduit
+# docker run -d -p 4200:4200 -p 8000:8000 -v $PWD/storage/:/home/spirit/app/backend/database/ spirit/conduit
