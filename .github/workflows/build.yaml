@@ -16,8 +16,10 @@ jobs:
         env:
           ACTIONS_STEP_DEBUG: true
         with:
-          username: spiritindianer
-          password: ${{ secrets.DPASS }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
 
       - name: Set Docker tag based on branch
         id: vars
@@ -31,5 +33,5 @@ jobs:
 
       - name: Build Docker Image and publish to docker hub
         working-directory: ./conduit
-        run: docker buildx build -t spiritindianer/workshop-pipeline:${{ env.BRANCH_TAG }} -f Dockerfile . ;
-          docker push spiritindianer/workshop-pipeline:${{ env.BRANCH_TAG }} ;
+        run: docker buildx build -t ghcr.io/${{ github.repository }}/workshop-pipeline:${{ env.BRANCH_TAG }} -f Dockerfile . ;
+          docker push ghcr.io/${{ github.repository }}/workshop-pipeline:${{ env.BRANCH_TAG }} ;
