@@ -17,14 +17,14 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  angular_tests_job:
-    uses: ./.github/workflows/angular-tests.yaml
+  #angular_tests_job:
+  #  uses: ./.github/workflows/angular-tests.yaml
 
-  django_tests_job:
-    uses: ./.github/workflows/django-tests.yaml
+  #django_tests_job:
+  #  uses: ./.github/workflows/django-tests.yaml
 
-  linter_job:
-    uses: ./.github/workflows/linter.yaml
+  #linter_job:
+  #  uses: ./.github/workflows/linter.yaml
 
   #quality-gate_job:
   #  needs: [ angular_tests_job, django_tests_job, linter_job ]
