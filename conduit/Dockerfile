@@ -11,7 +11,7 @@ FROM node:22.3.0 AS frontend
 WORKDIR /home/spirit/app
 COPY frontend .
 
-RUN npm install
+RUN npm install --ignore-scripts
 
 FROM python:3.10-alpine3.20
 
@@ -20,10 +20,10 @@ RUN apk add nodejs npm && \
 USER spirit
 WORKDIR /home/spirit/app
 EXPOSE 4200 8000
-COPY --chown=spirit --from=backend /opt/venv /home/spirit/app/backend/.venv
-COPY --chown=spirit --from=frontend /home/spirit/app /home/spirit/app/frontend
-COPY --chown=spirit backend /home/spirit/app/backend
-COPY --chown=spirit start.sh .
+COPY --chown=spirit --chmod=755 --from=backend /opt/venv /home/spirit/app/backend/.venv
+COPY --chown=spirit --chmod=755 --from=frontend /home/spirit/app /home/spirit/app/frontend
+COPY --chown=spirit --chmod=755 backend /home/spirit/app/backend
+COPY --chown=spirit --chmod=755 start.sh .
 RUN chmod +x start.sh
 
 CMD ["sh", "start.sh"]
