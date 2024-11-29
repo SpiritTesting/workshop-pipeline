@@ -18,10 +18,10 @@ concurrency:
 
 jobs:
   angular_tests_job:
-    uses: .github/workflows/angular-tests.yaml
+    uses: .github/workflows/angular-tests.yaml@ci-playground
 
   django_tests_job:
-    uses: .github/workflows/django-tests.yaml
+    uses: .github/workflows/django-tests.yaml@ci-playground
 
   linter_job:
-    uses: .github/workflows/linter.yaml
+    uses: .github/workflows/linter.yaml@ci-playground
