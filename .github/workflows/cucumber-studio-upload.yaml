@@ -1,0 +1,27 @@
+name: Upload Cucumber Report to Cucumber Studio (Template)
+
+jobs:
+  upload_cucumber_report:
+    runs-on: ubuntu-latest
+    if: false # das hier deaktiviert diesen Workflow, für konkrete workflows an den beispielen von angular_tests etc halten
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up CURL
+        run: sudo apt-get update && sudo apt-get install -y curl
+
+      - name: Upload Cucumber Report to Cucumber Studio
+        env:
+          CUCUMBER_STUDIO_TOKEN: ${{ secrets.CUCUMBER_STUDIO_TOKEN }}
+          PROJECT_ID: '469067'
+        run: |
+          REPORT_PATH="path/to/your/report.json" # Path to your Cucumber report
+          API_URL="https://studio.cucumber.io/api/projects/$PROJECT_ID/reports"
+          
+          curl -X POST "$API_URL" \
+            -H "Authorization: Bearer $CUCUMBER_STUDIO_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d @$REPORT_PATH
+
