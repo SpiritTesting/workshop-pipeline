@@ -7,64 +7,21 @@ env:
 
 on:
   pull_request:
-    branches: ['master', 'deploy']
+    branches: ['master', 'deploy', 'ci-playground']
 
   push:
-    branches: ['master', 'deploy']
+    branches: ['master', 'deploy', 'ci-playground']
 
 concurrency:
   group: ${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
 
 jobs:
-  linter:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code Repository
-        uses: actions/checkout@v4
+  linter_job:
+    uses: ./.github/workflows/linter.yml
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
+  angular_tests_job:
+    uses: ./.github/workflows/angular-tests.yml
 
-      - name: Run pre-commit
-        uses: pre-commit/action@v3.0.1
-
-  angular_tests:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./frontend
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install modules
-      run: yarn
-    - name: Run ESLint
-      run: yarn run eslint . --ext .js,.jsx,.ts,.tsx
-    - name: Run tests
-      run: npm run test
-
-  django_tests:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./backend
-
-    steps:
-      - name: Checkout Code Repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Run Django Tests
-        run: python manage.py test
+  django_tests_job:
+    uses: ./.github/workflows/django-tests.yml
