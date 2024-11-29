@@ -15,16 +15,13 @@ RUN npm install --ignore-scripts
 
 FROM python:3.10-alpine3.20
 
-RUN apk add nodejs npm && \
-    adduser -S spirit
-USER spirit
+RUN apk add nodejs npm
 WORKDIR /home/spirit/app
 EXPOSE 4200 8000
-COPY --chown=spirit --chmod=755 --from=backend /opt/venv /home/spirit/app/backend/.venv
-COPY --chown=spirit --chmod=755 --from=frontend /home/spirit/app /home/spirit/app/frontend
-COPY --chown=spirit --chmod=755 backend /home/spirit/app/backend
-COPY --chown=spirit --chmod=755 start.sh .
-RUN chmod +x start.sh
+COPY --chown=root:root --chmod=755 --from=backend /opt/venv /home/spirit/app/backend/.venv
+COPY --chown=root:root --chmod=755 --from=frontend /home/spirit/app /home/spirit/app/frontend
+COPY --chown=root:root --chmod=755 backend /home/spirit/app/backend
+COPY --chown=root:root --chmod=755 start.sh .
 
 CMD ["sh", "start.sh"]
 
