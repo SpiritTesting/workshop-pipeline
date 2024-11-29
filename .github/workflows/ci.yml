@@ -25,3 +25,13 @@ jobs:
 
   linter_job:
     uses: ./.github/workflows/linter.yaml
+
+  docker_build_job:
+    needs: [angular_tests_job, django_tests_job, linter_job]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker Image
+        run: docker buildx build -t spirit/conduit -f conduit/Dockerfile .
