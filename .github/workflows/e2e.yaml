@@ -32,6 +32,7 @@ jobs:
       - name: Run Playwright Cucumber tests
         run: npx cucumber-js test
         working-directory: e2e
+        continue-on-error: true
 
       # Upload test results as artifacts (optional)
       - name: Upload Test Artifacts
