@@ -6,13 +6,19 @@ COPY backend/requirements.txt .
 RUN python -m venv /opt/venv
 RUN /opt/venv/bin/pip install --no-cache-dir -r requirements.txt
 
-FROM node:22.3.0 AS frontend
+FROM node:22.3.0-alpine3.20 AS frontend
 
 WORKDIR /home/spirit/app
 COPY frontend .
 
 RUN npm install --ignore-scripts && \
     npm run build
+
+RUN apk add --no-cache  chromium
+
+RUN npm install karma karma-coverage --save-dev
+ENV CHROME_BIN /usr/bin/chromium
+RUN npm run test
 
 FROM python:3.10-alpine3.20
 
