@@ -10,7 +10,7 @@ on:
     types: [opened, synchronize, reopened]
 
   push:
-    branches: ['main', 'deploy', 'ci-playground', 'nfa/accessebility' ]
+    branches: ['main', 'ci-playground']
 
 concurrency:
   group: ${{ github.head_ref || github.run_id }}
@@ -35,7 +35,7 @@ jobs:
     uses: ./.github/workflows/linter.yaml
 
   quality_gate:
-    needs: [ angular_tests_job, django_tests_job, linter_job, sonar_job ]
+    needs: [ angular_tests_job, django_tests_job, linter_job, sonar_job, accessibility_job ]
     uses: ./.github/workflows/quality-gate.yaml
 
   build_and_publish_job:

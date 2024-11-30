@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./nfa/accessebility
+        working-directory: ./nfa/accessibility
 
     steps:
       # Checkout Code aus dem Repository
