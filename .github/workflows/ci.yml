@@ -44,9 +44,12 @@ jobs:
 
   build_and_publish_job:
     needs: [ quality_gate ]
+    if: success()
     uses: ./.github/workflows/build.yaml
 
   always_build_and_publish_job:
     needs: [ quality_gate_permissive ]
     uses: ./.github/workflows/build.yaml
+
+
 
