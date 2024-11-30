@@ -1,0 +1,115 @@
+[
+  {
+    "description": "    Um ein Blogeintrag zu lesen oder zu schreiben logge ich mich als Benutzer auf der Webseite ein.",
+    "elements": [
+      {
+        "description": "",
+        "id": "login;nicht-registrierter-nutzer-kann-sich-nicht-anmelden",
+        "keyword": "Scenario",
+        "line": 5,
+        "name": "Nicht Registrierter Nutzer kann sich nicht anmelden",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 2024931400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 6,
+            "name": "a not registerd user",
+            "match": {
+              "location": "tests\\steps\\login.js:23"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 641499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 7,
+            "name": "I open the login page",
+            "match": {
+              "location": "tests\\steps\\login.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 79398200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I enter the username and password",
+            "match": {
+              "location": "tests\\steps\\login.js:33"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 109908200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 9,
+            "name": "I am not logged in",
+            "match": {
+              "location": "tests\\steps\\login.js:37"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12593800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "Exception",
+            "match": {
+              "location": "tests\\steps\\login.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 123164499
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 237694599
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Prio-HOCH",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "login",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "login",
+    "tags": [
+      {
+        "name": "@Prio-HOCH",
+        "line": 1
+      }
+    ],
+    "uri": "tests\\features\\login.feature"
+  }
+]
