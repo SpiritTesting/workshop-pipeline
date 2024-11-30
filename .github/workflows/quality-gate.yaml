@@ -6,7 +6,6 @@ on:
 jobs:
   quality_gate:
     runs-on: ubuntu-latest
-    if: false  # Deaktiviert diesen Workflow, um als Template zu dienen
     steps:
       - name: Evaluate Test Results
         run: |

@@ -2,6 +2,13 @@ name: Sonar
 
 on:
   workflow_call:
+  inputs:
+    SONAR_TOKEN:
+      required: true
+      type: string
+    GITHUB_TOKEN:
+      required: true
+      type: string
 
 jobs:
   sonarcloud:
@@ -15,7 +22,7 @@ jobs:
       - name: SonarQube Cloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ inputs.SONAR_TOKEN }}
         continue-on-error: true
 
