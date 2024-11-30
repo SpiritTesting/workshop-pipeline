@@ -22,7 +22,9 @@
     </div>
       <hr>
       <label class="col-3" [for]="'field_sonarqube'">SonarQube:</label>
-      <img class="col-3" [id]="'field_sonarqube'" src="https://sonarcloud.io/api/project_badges/measure?project=SpiritTesting_workshop-pipeline&metric=alert_status">
+      <a class="col-3" target="_blank" href="https://sonarcloud.io/summary/overall?id=SpiritTesting_workshop-pipeline">
+      <img [id]="'field_sonarqube'" src="https://sonarcloud.io/api/project_badges/measure?project=SpiritTesting_workshop-pipeline&metric=alert_status">
+      </a>
     </div>
   }
   @case ('Test-Management') {
@@ -33,14 +35,17 @@
     </div>
       <hr>
       <label class="col-3" [for]="'field_sonarqube'">SonarQube:</label>
-      <img class="col-3" [id]="'field_sonarqube'" style="height: 50px!important;" src="https://sonarcloud.io/api/project_badges/quality_gate?project=SpiritTesting_workshop-pipeline">
+      <a class="col-3" target="_blank" href="https://sonarcloud.io/summary/overall?id=SpiritTesting_workshop-pipeline">
+      <img [id]="'field_sonarqube'" style="height: 50px!important;" src="https://sonarcloud.io/api/project_badges/quality_gate?project=SpiritTesting_workshop-pipeline">
+      </a>
     </div>
   }
   @case ('Product-Owner') {
     <div class="row">
-      <hr>
       <label class="col-3" [for]="'field_sonarqube'">SonarQube:</label>
-      <img class="col-3" [id]="'field_sonarqube'" src="https://sonarcloud.io/images/project_badges/sonarcloud-light.svg">
+      <a class="col-3" target="_blank" href="https://sonarcloud.io/summary/overall?id=SpiritTesting_workshop-pipeline">
+        <img [id]="'field_sonarqube'" style="height: 50px!important;" src="https://sonarcloud.io/images/project_badges/sonarcloud-light.svg">
+      </a>
     </div>
   }
 }
