@@ -1,7 +1,26 @@
 <h2>Dashboard</h2>
-
-<div>
-{{result}}
+<br><br><br>
+<label [for]="'field_auswahl'"><b>Rollen-Auswahl:</b></label>&nbsp;
+<select [(ngModel)]="role" id="field_auswahl">
+  <option [ngValue]="'Entwicklung'">Entwicklung</option>
+  <option [ngValue]="'Test-Management'">Test-Management</option>
+  <option [ngValue]="'Product-Owner'">Product-Owner</option>
+</select>
+<hr>
+<div *ngIf="role === 'Entwicklung'">
+  <label [for]="'field_szenarien'">Szenarien:</label>&nbsp;<div [id]="'field_szenarien'">{{result}}</div>
+  <hr>
+  <label [for]="'field_sonarqube'">SonarQube:</label>&nbsp;<img [id]="'field_sonarqube'" src="https://sonarcloud.io/api/project_badges/measure?project=SpiritTesting_workshop-pipeline&metric=alert_status">
 </div>
-<br><br>
-<button (click)="getCucumberStudioApi()">Refresh</button>
+
+<div *ngIf="role === 'Test-Management'">
+  <label [for]="'field_szenarien'">Szenarien:</label>&nbsp;<div [id]="'field_szenarien'">{{result}}</div>
+  <hr>
+  <label [for]="'field_sonarqube'">SonarQube:</label>&nbsp;<img [id]="'field_sonarqube'" src="https://sonarcloud.io/api/project_badges/quality_gate?project=SpiritTesting_workshop-pipeline">
+</div>
+
+<div *ngIf="role === 'Product-Owner'">
+  <label [for]="'field_szenarien'">Szenarien:</label>&nbsp;<div [id]="'field_szenarien'">{{result}}</div>
+  <hr>
+  <label [for]="'field_sonarqube'">SonarQube:</label>&nbsp;<img [id]="'field_sonarqube'" src="https://sonarcloud.io/images/project_badges/sonarcloud-light.svg">
+</div>

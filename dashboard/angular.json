@@ -72,6 +72,7 @@
               "buildTarget": "dashboard:build:production"
             },
             "development": {
+              "proxyConfig": "src/proxy.conf.json",
               "buildTarget": "dashboard:build:development"
             }
           },
