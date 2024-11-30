@@ -29,11 +29,13 @@ jobs:
   linter_job:
     uses: ./.github/workflows/linter.yaml
 
+  e2e_job:
+    uses: ./.github/workflows/e2e.yaml
   #quality-gate_job:
     #needs: [ angular_tests_job, django_tests_job, linter_job ]
     #uses: ./.github/workflows/quality-gate.yaml
 
   build_and_publish_job:
-    needs: [angular_tests_job, django_tests_job, linter_job, sonar_job]
+    needs: [angular_tests_job, django_tests_job, linter_job, sonar_job, e2e_job]
     uses: ./.github/workflows/build.yaml
 
