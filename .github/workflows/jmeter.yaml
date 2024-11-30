@@ -17,9 +17,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y openjdk-11-jre
-          wget https://dlcdn.apache.org//jmeter/binaries/apache-jmeter-5.5.tgz
-          tar -xvzf apache-jmeter-5.5.tgz
-          mv apache-jmeter-5.5 jmeter
+          wget https://dlcdn.apache.org/jmeter/binaries/apache-jmeter-5.6.3.tgz
+          tar -xvzf apache-jmeter-5.6.3.tgz
+          mv apache-jmeter-5.6.3 jmeter
 
       # 3. Run JMeter Tests
       - name: Run JMeter Tests
