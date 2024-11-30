@@ -10,13 +10,16 @@ on:
     types: [opened, synchronize, reopened]
 
   push:
-    branches: ['main', 'deploy', 'ci-playground']
+    branches: ['main', 'deploy', 'ci-playground', 'nfa/accessebility' ]
 
 concurrency:
   group: ${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
 
 jobs:
+  accessibility_job:
+    uses: ./.github/workflows/accessibility-tests.yaml
+
   sonar_job:
     uses: ./.github/workflows/sonar.yaml
     secrets:
