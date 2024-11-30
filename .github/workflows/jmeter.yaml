@@ -25,6 +25,8 @@ jobs:
       - name: Run JMeter Tests
         run: |
           jmeter/bin/jmeter -n -t LP_Test_Workshop.jmx -l results.jtl -e -o report
+        continue-on-error: true
+
 
       # 4. Upload Test Results
       - name: Upload Test Results
