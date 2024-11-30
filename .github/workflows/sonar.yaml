@@ -2,13 +2,13 @@ name: Sonar
 
 on:
   workflow_call:
-    inputs:
+    secrets:
       SONAR_TOKEN:
+        description: 'Token for SonarQube analysis'
         required: true
-        type: string
       GITHUB_TOKEN:
+        description: 'GitHub token for accessing the repository'
         required: true
-        type: string
 
 jobs:
   sonarcloud:
@@ -17,12 +17,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0
 
       - name: SonarQube Cloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ inputs.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         continue-on-error: true
-
