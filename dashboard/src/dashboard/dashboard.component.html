@@ -1,3 +1,4 @@
+<div class="m-1 border-2 border-dark rounded-1">
 <h2>Dashboard</h2>
 <br><br><br>
 <label [for]="'field_auswahl'"><b>Rollen-Auswahl:</b></label>&nbsp;
@@ -9,27 +10,38 @@
 <hr>
 @switch (role) {
   @case ('Entwicklung') {
-    <div>
-      <label [for]="'field_szenarien'">Szenarien:</label>&nbsp;<div [id]="'field_szenarien'">{{ result }}</div>
+    <div class="row">
+      <label class="col-3" [for]="'field_cucumba'">JMeter-Übersicht:</label>
+      <div class="col-3" [id]="'field_cucumba'">
+      <a href="https://github.com/SpiritTesting/workshop-pipeline/actions" target="_blank">Test runs</a>
+    </div>
       <hr>
-      <label [for]="'field_sonarqube'">SonarQube:</label>&nbsp;<img [id]="'field_sonarqube'"
-                                                                    src="https://sonarcloud.io/api/project_badges/measure?project=SpiritTesting_workshop-pipeline&metric=alert_status">
+      <label class="col-3" [for]="'field_cucumba'">Cucumba-Übersicht:</label>
+      <div class="col-3" [id]="'field_cucumba'">
+      <a href="https://studio.cucumber.io/projects/469067/test-runs" target="_blank">Test runs</a>
+    </div>
+      <hr>
+      <label class="col-3" [for]="'field_sonarqube'">SonarQube:</label>
+      <img class="col-3" [id]="'field_sonarqube'" src="https://sonarcloud.io/api/project_badges/measure?project=SpiritTesting_workshop-pipeline&metric=alert_status">
     </div>
   }
   @case ('Test-Management') {
-    <div>
-      <label [for]="'field_szenarien'">Szenarien:</label>&nbsp;<div [id]="'field_szenarien'">{{ result }}</div>
+    <div class="row">
+      <label class="col-3" [for]="'field_cucumba'">Cucumba-Übersicht:</label>
+      <div class="col-3" [id]="'field_cucumba'">
+      <a href="https://studio.cucumber.io/projects/469067/test-runs" target="_blank">Test runs</a>
+    </div>
       <hr>
-      <label [for]="'field_sonarqube'">SonarQube:</label>&nbsp;<img [id]="'field_sonarqube'"
-                                                                    src="https://sonarcloud.io/api/project_badges/quality_gate?project=SpiritTesting_workshop-pipeline">
+      <label class="col-3" [for]="'field_sonarqube'">SonarQube:</label>
+      <img class="col-3" [id]="'field_sonarqube'" style="height: 50px!important;" src="https://sonarcloud.io/api/project_badges/quality_gate?project=SpiritTesting_workshop-pipeline">
     </div>
   }
   @case ('Product-Owner') {
-    <div>
-      <label [for]="'field_szenarien'">Szenarien:</label>&nbsp;<div [id]="'field_szenarien'">{{ result }}</div>
+    <div class="row">
       <hr>
-      <label [for]="'field_sonarqube'">SonarQube:</label>&nbsp;<img [id]="'field_sonarqube'"
-                                                                    src="https://sonarcloud.io/images/project_badges/sonarcloud-light.svg">
+      <label class="col-3" [for]="'field_sonarqube'">SonarQube:</label>
+      <img class="col-3" [id]="'field_sonarqube'" src="https://sonarcloud.io/images/project_badges/sonarcloud-light.svg">
     </div>
   }
 }
+</div>
