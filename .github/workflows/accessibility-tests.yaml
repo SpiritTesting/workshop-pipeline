@@ -1,4 +1,4 @@
-name: accessibility tests
+name: accessibility
 
 on:
   workflow_call:

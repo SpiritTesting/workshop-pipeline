@@ -1,4 +1,4 @@
-name: Quality Gate
+name: qualityGatePermissive
 
 on:
   workflow_call:
@@ -22,6 +22,9 @@ jobs:
           echo "Sonar checks failed!"
           fi
           if [ "${{ needs.access.result }}" != "success" ]; then
+          echo "Sonar checks failed!"
+          fi
+          if [ "${{ needs.jmeter.result }}" != "success" ]; then
           echo "Sonar checks failed!"
           fi
           exit 0
