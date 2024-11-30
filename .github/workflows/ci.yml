@@ -34,6 +34,6 @@ jobs:
     #uses: ./.github/workflows/quality-gate.yaml
 
   build_and_publish_job:
-    needs: [angular_tests_job, django_tests_job, linter_job]
+    needs: [angular_tests_job, django_tests_job, linter_job, sonar_job]
     uses: ./.github/workflows/build.yaml
 
