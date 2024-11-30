@@ -8,15 +8,23 @@ import {
   OnInit
 } from '@angular/core';
 import {ApiService} from './api.service';
-import {FormsModule} from '@angular/forms';
+import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgIf} from '@angular/common';
+import {Rollen} from '../enum/rollen';
+import {MatFormField, MatLabel, MatOption, MatSelect} from '@angular/material/select';
+import {MatDivider} from '@angular/material/divider';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
     FormsModule,
-    NgIf
+    MatLabel,
+    MatSelect,
+    MatOption,
+    MatDivider,
+    MatFormField,
+    ReactiveFormsModule
 
   ],
   templateUrl: './dashboard.component.html',
@@ -30,22 +38,27 @@ export class DashboardComponent implements OnInit, AfterContentInit {
   apiService = inject(ApiService);
   result: any;
   isLoaded: boolean = false;
-  role: string = '';
+  role: string = ''
+  availableOptions = [
+    Rollen.INITIAL,
+    Rollen.ENTWICKLUNG,
+    Rollen.PRODUCT_OWNER,
+    Rollen.TEST_MANAGER
+  ];
 
   constructor() {
   }
   ngOnInit() {
-    this.getCucumberStudioApi();
+    //this.getCucumberStudioApi();
 
     setTimeout(() => {
       }, 1000);
-    // this.cdRef.detectChanges();
   }
 
   ngAfterContentInit()  {
     if (!this.isLoaded && !this.result) {
       this.isLoaded = true;
-      this.getCucumberStudioApi();
+      //this.getCucumberStudioApi();
     }
     // this.cdRef.detectChanges();
 
@@ -64,4 +77,5 @@ export class DashboardComponent implements OnInit, AfterContentInit {
     }
   }
 
+  protected readonly Rollen = Rollen;
 }
