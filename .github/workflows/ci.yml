@@ -1,0 +1,39 @@
+name: CI
+
+# Enable Buildkit and let compose use it to speed up image building
+env:
+  DOCKER_BUILDKIT: 1
+  COMPOSE_DOCKER_CLI_BUILD: 1
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+  push:
+    branches: ['main', 'deploy', 'ci-playground']
+
+concurrency:
+  group: ${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  sonar_job:
+    uses: ./.github/workflows/sonar.yaml
+
+  angular_tests_job:
+    uses: ./.github/workflows/angular-tests.yaml
+
+  django_tests_job:
+    uses: ./.github/workflows/django-tests.yaml
+
+  linter_job:
+    uses: ./.github/workflows/linter.yaml
+
+  #quality-gate_job:
+    #needs: [ angular_tests_job, django_tests_job, linter_job ]
+    #uses: ./.github/workflows/quality-gate.yaml
+
+  build_and_publish_job:
+    needs: [angular_tests_job, django_tests_job, linter_job, sonar_job]
+    uses: ./.github/workflows/build.yaml
+
