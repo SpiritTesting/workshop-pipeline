@@ -4,6 +4,8 @@ name: CI
 env:
   DOCKER_BUILDKIT: 1
   COMPOSE_DOCKER_CLI_BUILD: 1
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
 on:
   pull_request:
@@ -29,9 +31,9 @@ jobs:
   linter_job:
     uses: ./.github/workflows/linter.yaml
 
-  #quality-gate_job:
-    #needs: [ angular_tests_job, django_tests_job, linter_job ]
-    #uses: ./.github/workflows/quality-gate.yaml
+  quality_gate:
+    needs: [ angular_tests_job, django_tests_job, linter_job, sonar_job ]
+    uses: ./.github/workflows/quality-gate.yaml
 
   build_and_publish_job:
     needs: [angular_tests_job, django_tests_job, linter_job, sonar_job]
