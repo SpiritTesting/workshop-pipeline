@@ -6,6 +6,9 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.Collections;
 import java.util.List;
 
 public class BasisTest {
@@ -16,7 +19,7 @@ public class BasisTest {
         try (Playwright playwright = Playwright.create();
              Browser browser = playwright.chromium().launch();) {
             Page page = browser.newPage();
-            page.navigate("http://localhost:4200");
+            page.navigate("https://workshop.spirit-indianer.com");
 
             AxeResults accessibilityScanResults = new AxeBuilder(page).analyze();
 
@@ -24,6 +27,8 @@ public class BasisTest {
             for (Rule violation : violations) {
                 System.out.println(violation.toString());
             }
+
+            assertEquals(Collections.emptyList(), violations);
         }
     }
 }
