@@ -6,9 +6,6 @@ on:
       SONAR_TOKEN:
         description: 'Token for SonarQube analysis'
         required: true
-      GITHUB_TOKEN:
-        description: 'GitHub token for accessing the repository'
-        required: true
 
 jobs:
   sonarcloud:

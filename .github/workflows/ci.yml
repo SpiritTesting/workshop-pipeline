@@ -21,7 +21,6 @@ jobs:
     uses: ./.github/workflows/sonar.yaml
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   angular_tests_job:
     uses: ./.github/workflows/angular-tests.yaml
