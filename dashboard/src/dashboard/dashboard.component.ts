@@ -1,10 +1,22 @@
-import {AfterViewInit, ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewChecked,
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  inject,
+  OnInit
+} from '@angular/core';
 import {ApiService} from './api.service';
+import {FormsModule} from '@angular/forms';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
+    FormsModule,
+    NgIf
 
   ],
   templateUrl: './dashboard.component.html',
@@ -12,34 +24,44 @@ import {ApiService} from './api.service';
 })
 
 
-export class DashboardComponent implements OnInit, AfterViewInit {
+export class DashboardComponent implements OnInit, AfterContentInit {
 
   cdRef = inject(ChangeDetectorRef);
   apiService = inject(ApiService);
-  result: string | undefined;
+  result: any;
+  isLoaded: boolean = false;
+  role: string = '';
 
   constructor() {
   }
   ngOnInit() {
-    // setTimeout(() => {
-    //   }, 10000);
+    this.getCucumberStudioApi();
+
+    setTimeout(() => {
+      }, 1000);
     // this.cdRef.detectChanges();
   }
 
-  ngAfterViewInit() {
-    this.getCucumberStudioApi();
-    setTimeout(() => {
-      }, 1000);
+  ngAfterContentInit()  {
+    if (!this.isLoaded && !this.result) {
+      this.isLoaded = true;
+      this.getCucumberStudioApi();
+    }
     // this.cdRef.detectChanges();
 
   }
 
   getCucumberStudioApi() {
-    this.apiService.get().then((data: any) => {
-      this.result = data.data[0].id;
-      console.log('DATEN', data.data)
-      // this.cdRef.detectChanges();
-    });
+    if (!this.isLoaded && !this.result) {
+      this.apiService.get().then((data: any) => {
+        console.log('DATEN', data.data)
+        if (data) {
+          const obj = Object.assign({}, data);
+          this.result = this.result ? this.result : obj.data[0].id;
+        }
+        // this.cdRef.detectChanges();
+      });
+    }
   }
 
 }
