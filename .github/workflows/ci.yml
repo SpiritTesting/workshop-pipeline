@@ -17,6 +17,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  accessibility_job:
+    uses: ./.github/workflows/accessibility-tests.yaml
+
   sonar_job:
     uses: ./.github/workflows/sonar.yaml
 
