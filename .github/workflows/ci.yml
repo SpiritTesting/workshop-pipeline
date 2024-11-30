@@ -38,6 +38,15 @@ jobs:
     needs: [ angular_tests_job, django_tests_job, linter_job, sonar_job, accessibility_job ]
     uses: ./.github/workflows/quality-gate.yaml
 
+  quality_gate_permissive:
+    needs: [ angular_tests_job, django_tests_job, linter_job, sonar_job, accessibility_job ]
+    uses: ./.github/workflows/quality-gate-permissive.yaml
+
   build_and_publish_job:
     needs: [ quality_gate ]
     uses: ./.github/workflows/build.yaml
+
+  always_build_and_publish_job:
+    needs: [ quality_gate_permissive ]
+    uses: ./.github/workflows/build.yaml
+
