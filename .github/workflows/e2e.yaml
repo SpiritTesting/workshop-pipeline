@@ -30,7 +30,7 @@ jobs:
 
       # Run tests
       - name: Run Playwright Cucumber tests
-        run: npm run test:cucumber
+        run: npx cucumber-js test
         working-directory: e2e
 
       # Upload test results as artifacts (optional)
