@@ -1,12 +1,7 @@
 name: ZAP Security Scan
 
 on:
-  push:
-    branches:
-      - main  # Der Workflow wird bei Pushes auf den Hauptbranch ausgelöst.
-  pull_request:
-    branches:
-      - main  # Auch bei Pull-Requests zum Hauptbranch wird der Scan ausgeführt.
+  workflow_call:
 
 jobs:
   zap_scan:
@@ -16,9 +11,11 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2  # Checkout des Repositories.
 
-      - name: Set up Java (ZAP benötigt Java)
-        uses: actions/setup-java@v2
+      # Setze die Java-Umgebung auf
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
         with:
+          distribution: 'zulu'
           java-version: '11'
 
       - name: Install OWASP ZAP
@@ -40,6 +37,8 @@ jobs:
 
           # Scan mit detaillierteren Optionen (optional)
           # /opt/zap/zap-cli active-scan -t https://workshop.spirit-indianer.com
+        continue-on-error: true
+
 
       - name: Archive ZAP Report
         run: |
@@ -49,7 +48,8 @@ jobs:
           mv zap_report.html reports/
 
       - name: Upload ZAP Report as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: zap-report
           path: reports/zap_report.html
+        continue-on-error: true

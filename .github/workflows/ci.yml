@@ -10,7 +10,7 @@ on:
     types: [opened, synchronize, reopened]
 
   push:
-    branches: ['main', 'deploy', 'ci-playground']
+    branches: ['main', 'deploy', 'ci-playground', 'feature/security']
 
 concurrency:
   group: ${{ github.head_ref || github.run_id }}
@@ -28,6 +28,9 @@ jobs:
 
   linter_job:
     uses: ./.github/workflows/linter.yaml
+
+  zap-scan_job:
+    uses: ./.github/workflows/zap_scan.yml
 
   #quality-gate_job:
     #needs: [ angular_tests_job, django_tests_job, linter_job ]
