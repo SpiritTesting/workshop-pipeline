@@ -1,10 +1,7 @@
-name: Quality Gate (Template)
+name: Quality Gate
 
 on:
-  workflow_run:
-    workflows: ["CI"]
-    types:
-      - completed
+  workflow_call:
 
 jobs:
   quality_gate:
@@ -25,8 +22,9 @@ jobs:
             echo "Linter checks failed!"
             exit 1
           fi
+          if [ "${{ needs.sonar.result }}" != "success" ]; then
+          echo "Sonar checks failed!"
+              exit 1
+          fi
       - name: Quality Gate Passed
         run: echo "All checks are successful. Quality Gate passed!"
-
-
-        #Das alles muss wahrscheinlich in die ci.yml wenn wir soweit sind
